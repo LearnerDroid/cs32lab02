@@ -61,18 +61,19 @@ class stateDemog {
     }
 
     void calculate(){
-      double totalUG = 0;
-      double totalHS = 0;
       for(shared_ptr<demogData> county : counties){
-        popOver65 += county->getpopOver65();
-        popUnder18 += county->getpopUnder18();
-        popUnder5 += county->getpopUnder5();
-        totalUG += county->getBAup() * county->getTotalPop();
-        totalHS += county->getHSup() * county->getTotalPop();
+        popOver65 += county->getpopOver65() * county->getTotalPop();
+        popUnder18 += county->getpopUnder18() * county->getTotalPop();
+        popUnder5 += county->getpopUnder5() * county->getTotalPop();
+        percentUndergraduate += county->getBAup() * county->getTotalPop();
+        percentHighSchool += county->getHSup() * county->getTotalPop();
         totalPop += county->getTotalPop();
       }
-      percentUndergraduate = totalUG/totalPop;
-      percentHighSchool = totalHS/totalPop;
+      popOver65 /= totalPop;
+      popUnder18 /= totalPop;
+      popUnder5 /= totalPop;
+      percentUndergraduate /= totalPop;
+      percentHighSchool /= totalPop;
     }
 
 private:
