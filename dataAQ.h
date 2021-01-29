@@ -16,7 +16,7 @@ class dataAQ {
 
     }
     void createStateData(std::vector< shared_ptr<demogData> > theData){
-      string state;
+      string state = "";
       for( shared_ptr<demogData> county: theData) {
         state = county->getState();
         //if true, key is not found
@@ -35,10 +35,11 @@ class dataAQ {
       string state = "";
       double largestPop = 0;
       double pop = 0;
-      for(map<string, shared_ptr<stateDemog>>::iterator i = states.begin(); i != states.end(); ++i ){
-        pop = i->second->getpopUnder5() / i->second->getTotalPop();
-        //cout << i->second->getName() << "                        " << pop << endl;
+      for(map<string, shared_ptr<stateDemog>>::iterator i = states.begin(); i != states.end(); i++ ){
+        pop = i->second->getpopUnder5();
+        //cout << i->second->getName() << "       " << pop << endl;
         if(pop > largestPop){
+          //cout << i->second->getName() << endl;
           largestPop = pop;
           state = i->first;
         }
@@ -56,9 +57,10 @@ class dataAQ {
       string state = "";
       double largestPop = 0;
       double pop = 0;
-      for(map<string, shared_ptr<stateDemog>>::iterator i = states.begin(); i != states.end(); ++i ){
-        pop = i->second->getpopUnder18() / i->second->getTotalPop();
+      for(map<string, shared_ptr<stateDemog>>::iterator i = states.begin(); i != states.end(); i++ ){
+        pop = i->second->getpopUnder18();
         if(pop > largestPop){
+          //cout << i->second->getName() << "       " << pop << endl;
           largestPop = pop;
           state = i->first;
         }
@@ -70,9 +72,11 @@ class dataAQ {
       string state = "";
       double largestPop = 0;
       double pop = 0;
-      for(map<string, shared_ptr<stateDemog>>::iterator i = states.begin(); i != states.end(); ++i ){
-        pop = i->second->getpopOver65() / i->second->getTotalPop();
+      for(map<string, shared_ptr<stateDemog>>::iterator i = states.begin(); i != states.end(); i++ ){
+        pop = i->second->getpopOver65();
+        //cout << i->second->getName() << "       " << pop << endl;
         if(pop > largestPop){
+          //cout << i->second->getName() << endl;
           largestPop = pop;
           state = i->first;
         }
@@ -84,9 +88,11 @@ class dataAQ {
       string state = "";
       double largestPop = 0;
       double pop = 0;
-      for(map<string, shared_ptr<stateDemog>>::iterator i = states.begin(); i != states.end(); ++i ){
-        pop = 1 - i->second->getHSup();
+      for(map<string, shared_ptr<stateDemog>>::iterator i = states.begin(); i != states.end(); i++ ){
+        pop = 100 - i->second->getHSup();
+        //cout << i->second->getName() << "       " << pop << endl;
         if(pop > largestPop){
+          //cout << i->second->getName() << "   inside     " << pop << endl;
           largestPop = pop;
           state = i->first;
         }
@@ -98,9 +104,11 @@ class dataAQ {
       string state = "";
       double largestPop = 0;
       double pop = 0;
-      for(map<string, shared_ptr<stateDemog>>::iterator i = states.begin(); i != states.end(); ++i ){
+      for(map<string, shared_ptr<stateDemog>>::iterator i = states.begin(); i != states.end(); i++ ){
         pop = i->second->getBAup();
+        //cout << i->second->getName() << "       " << pop << endl;
         if(pop > largestPop){
+          //cout << i->second->getName() << "   inside     " << pop << endl;
           largestPop = pop;
           state = i->first;
           //cout << state << " " << largestPop << endl;
@@ -112,6 +120,7 @@ class dataAQ {
         }
         */
       }
+      //cout << "Test Failed: 'Testing state data aggregation query...\nPASSED: youngestPop\nPASSED: bachelors\nPASSED: teenPop\nPASSED: wisePop\nPASSED: underServeHS' != 'Testing state data aggregation query...\n   FAILED: youngestPop\n     Expected: UT Actual: SD\nPASSED: bachelors\n   FAILED: teenPop\n     Expected: UT Actual: SD\n   FAILED: wisePop\n     Expected: FL Actual: SD\n   FAILED: underServeHS\n     Expected: CA Actual:" << endl;
       return state;
     }
     map<string, shared_ptr<stateDemog>> states;
