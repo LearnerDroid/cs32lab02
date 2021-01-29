@@ -37,7 +37,7 @@ class dataAQ {
       double pop = 0;
       for(map<string, shared_ptr<stateDemog>>::iterator i = states.begin(); i != states.end(); ++i ){
         pop = i->second->getpopUnder5() / i->second->getTotalPop();
-        cout << i->second->getName() << "                        " << pop << endl;
+        //cout << i->second->getName() << "                        " << pop << endl;
         if(pop > largestPop){
           largestPop = pop;
           state = i->first;
@@ -103,7 +103,7 @@ class dataAQ {
         if(pop > largestPop){
           largestPop = pop;
           state = i->first;
-          cout << state << " " << largestPop << endl;
+          //cout << state << " " << largestPop << endl;
         }
         /*
         if((i->first).compare("DC") == 0){
